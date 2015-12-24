@@ -8,9 +8,9 @@ namespace cpGames.Serialization
 {
     public class DictionarySerializer
     {
-        public static Dictionary<byte, object> Serialize(object item, byte mask = 0)
+        public static Dictionary<string, object> Serialize(object item, byte mask = 0)
         {
-            var data = new Dictionary<byte, object>();
+            var data = new Dictionary<string, object>();
 
             var fields = item.GetType().GetFields().Where(x =>
                 (x.GetCustomAttributes(typeof(Field), false).Length == 0) ||
@@ -28,10 +28,10 @@ namespace cpGames.Serialization
                 var value = field.GetValue(item);
 
                 if (value != null)
-                    data.Add(iField, SerializeField(value, mask));
+                    data.Add(field.Name, SerializeField(value, mask));
             }
 
-            data.Add(255, SerializeName(item));
+            data.Add("Type", SerializeName(item));
 
             return data;
         }
@@ -67,6 +67,11 @@ namespace cpGames.Serialization
             if (type.IsClass)
             {
                 return Serialize(value, mask);
+            }
+
+            if (type.IsEnum)
+            {
+                return value.ToString();
             }
 
             throw new Exception(string.Format("Unsupported type {0}", type.Name));
@@ -105,13 +110,18 @@ namespace cpGames.Serialization
                 return (T)InvokeGeneric("DeserializeObject", type, data);
             }
 
+            if (type.IsEnum)
+            {
+                return (T)Enum.Parse(type, (string)data);
+            }
+
             throw new Exception(string.Format("Unsupported type {0}", type.Name));
         }
 
-        private static T DeserializeObject<T>(Dictionary<byte, object> dict)
+        private static T DeserializeObject<T>(Dictionary<string, object> dict)
         {
             var assembly = Assembly.GetAssembly(typeof(T));
-            Type type = GetTypeByName((string)dict[255], assembly);
+            Type type = GetTypeByName((string)dict["Type"], assembly);
             ConstructorInfo ctor = type.GetConstructor(Type.EmptyTypes);
             T serializable = (T)ctor.Invoke(null);
 
@@ -123,12 +133,12 @@ namespace cpGames.Serialization
             {
                 var field = fields.ElementAt(iField);
 
-                if (!dict.ContainsKey(iField))
-                    continue;
+                object value;
 
-                var value = dict[iField];
-
-                field.SetValue(serializable, InvokeGeneric("Deserialize", field.FieldType, value));
+                if (dict.TryGetValue(field.Name, out value))
+                {
+                    field.SetValue(serializable, InvokeGeneric("Deserialize", field.FieldType, value));
+                }
 
             }
             return serializable;

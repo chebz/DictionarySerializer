@@ -1,1 +1,1 @@
-Did life get you down? Do you feel like you are missing something important to be happy? Well look no further! Custom serializer converting your classes to Dictionary(byte, object) format. Where object is either a primitive or string datatype. Enjoy!
+Did life get you down? Do you feel like you are missing something important to be happy? Well look no further! Custom serializer converting your classes to Dictionary(string, object) format. Where string is field name and object is either a primitive, string, or nested Dictionary(string, object) datatype. Enjoy!
