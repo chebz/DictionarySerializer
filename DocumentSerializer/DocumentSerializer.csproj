@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DA3E30FA-64FC-46C0-84CF-106FEE2B3C6B}</ProjectGuid>
+    <ProjectGuid>{47BEA062-C296-4596-A6F8-98C26E531D5A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DictionarySerializer</RootNamespace>
-    <AssemblyName>DictionarySerializer</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <RootNamespace>DocumentSerializer</RootNamespace>
+    <AssemblyName>DocumentSerializer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,19 +30,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AWSSDK.DynamoDBv2">
+      <HintPath>..\PADynamoDB\bin\Debug\AWSSDK.DynamoDBv2.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DictionarySerializer.cs" />
+    <Compile Include="DocumentSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SerializationCommon\SerializationCommon.csproj">
+    <ProjectReference Include="..\..\..\Tools\Serialization\SerializationCommon\SerializationCommon.csproj">
       <Project>{19eadeb4-469e-4b6c-8192-cc3277587c98}</Project>
       <Name>SerializationCommon</Name>
     </ProjectReference>

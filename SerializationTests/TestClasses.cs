@@ -1,7 +1,6 @@
-﻿using cpGames.Serialization;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace DictionarySerializerTest
+namespace cpGames.Serialization.Tests
 {
     public class TestClassA
     {
@@ -65,16 +64,16 @@ namespace DictionarySerializerTest
 
         public List<List<int>> listOfLists;
 
-        [DictionarySerializer.Field(ignore = true)]
+        [Common.Field(ignore = true)]
         public string ignoreMe;
 
-        [DictionarySerializer.Field(mask = 1)]
+        [Common.Field(mask = 1)]
         public string onlyForPrivileged;
 
-        [DictionarySerializer.Field(mask = 2)]
+        [Common.Field(mask = 2)]
         public string onlyForSuperPrivileged;
 
-        [DictionarySerializer.Field(mask = 1 | 2)]
+        [Common.Field(mask = 1 | 2)]
         public string forBoth;
     }
 
@@ -92,7 +91,7 @@ namespace DictionarySerializerTest
         public TestClassC c;
     }
 
-    [DictionarySerializer.Class("C")]
+    [Common.Class("C")]
     public class TestClassC
     {
         public void SetValues()

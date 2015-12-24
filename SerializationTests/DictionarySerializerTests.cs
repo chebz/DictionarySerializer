@@ -1,14 +1,12 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using cpGames.Serialization;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace DictionarySerializerTest
+namespace cpGames.Serialization.Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class DictionarySerializerTests
     {
         [TestMethod]
-        public void DictionarySerializerTest()
+        public void DictionaryTest1()
         {
             var a = new TestClassA();
             a.SetValues();

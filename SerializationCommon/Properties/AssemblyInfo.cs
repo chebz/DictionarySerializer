@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DictionarySerializerTest")]
+[assembly: AssemblyTitle("SerializationCommon")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("DictionarySerializerTest")]
+[assembly: AssemblyProduct("SerializationCommon")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("8e063564-4d40-4526-919e-45ebee232ddb")]
+[assembly: Guid("87ae6b0a-7a62-4969-912d-ecec400d0a81")]
 
 // Version information for an assembly consists of the following four values:
 //

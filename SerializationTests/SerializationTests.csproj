@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EFFB64EB-0716-4583-9D7F-95EA9CC1BD6D}</ProjectGuid>
+    <ProjectGuid>{6A3D4DE3-3A1F-492F-BBE9-5AA9488C3552}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DictionarySerializerTest</RootNamespace>
-    <AssemblyName>DictionarySerializerTest</AssemblyName>
+    <RootNamespace>SerializationTests</RootNamespace>
+    <AssemblyName>SerializationTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AWSSDK.DynamoDBv2">
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\AWS SDK for .NET\bin\Net45\AWSSDK.DynamoDBv2.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -50,14 +53,23 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DictionarySerializerTests.cs" />
     <Compile Include="TestClasses.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="DocumentSerializerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DictionarySerializer\DictionarySerializer.csproj">
       <Project>{da3e30fa-64fc-46c0-84cf-106fee2b3c6b}</Project>
       <Name>DictionarySerializer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DocumentSerializer\DocumentSerializer.csproj">
+      <Project>{47bea062-c296-4596-a6f8-98c26e531d5a}</Project>
+      <Name>DocumentSerializer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SerializationCommon\SerializationCommon.csproj">
+      <Project>{19eadeb4-469e-4b6c-8192-cc3277587c98}</Project>
+      <Name>SerializationCommon</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
