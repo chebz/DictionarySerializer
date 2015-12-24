@@ -49,26 +49,7 @@ namespace cpGames.Serialization
 
             if (type.GetInterfaces().Contains(typeof(IList)))
             {
-                var list = (IList)value;
-                //var elementType = Common.GetElementType(type);
-                //if (IsPrimitive(elementType))
-                //{
-                //    var listOfPrimitives = new List<Primitive>();
-                //    foreach (var item in list)
-                //    {
-                //        listOfPrimitives.Add(ValueToPrimitive(item));
-                //    }
-                //    return listOfPrimitives;
-                //}
-                //else
-                //{
-                //    var listOfEntries = new DynamoDBList();
-                //    foreach (var item in list)
-                //    {
-                //        listOfEntries.Add(SerializeField(item, mask));
-                //    }
-                //    return listOfEntries;
-                //}               
+                var list = (IList)value;        
                 var listOfEntries = new DynamoDBList();
                 foreach (var item in list)
                 {
