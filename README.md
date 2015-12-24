@@ -4,4 +4,4 @@ Did life get you down? Do you feel like you are missing something important to b
 	Serializes your classes to Dictionary(string, object) where string is a field name and object is a primitive data type. I use it with Photon Server protocol.
 	
 2. Document Serializer:
-	Converts your classes to AWS DynamoDB Document type and back. Now you can store your classes in aws database (without using their DataModel pipeline that totally disrepects abstract classees). Woo!
+	Converts your classes to AWS DynamoDB Document type and back. Now you can store your classes in aws database (without using their DataModel pipeline that totally disrepects abstract or interface). Woo!
