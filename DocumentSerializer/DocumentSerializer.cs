@@ -106,7 +106,7 @@ namespace cpGames.Serialization
 
             if (type.IsEnum)
             {
-                return (T)Enum.Parse(type, (string)data);
+                return (T)Enum.Parse(type, (string)(dynamic)data);
             }
 
             throw new Exception(string.Format("Unsupported type {0}", type.Name));
@@ -121,8 +121,11 @@ namespace cpGames.Serialization
 
             foreach (var field in fields)
             {
-                var entry = doc[field.Name];
-                field.SetValue(serializable, Common.InvokeGeneric<DocumentSerializer>("Deserialize", field.FieldType, entry));
+                DynamoDBEntry entry;
+                if (doc.TryGetValue(field.Name, out entry))
+                {
+                    field.SetValue(serializable, Common.InvokeGeneric<DocumentSerializer>("Deserialize", field.FieldType, entry));
+                }
             }
             return serializable;
         }
@@ -133,9 +136,19 @@ namespace cpGames.Serialization
             var listCtor = type.GetConstructor(new Type[] { typeof(int) });
             var list = (IList)listCtor.Invoke(new object[] { dbList.Entries.Count });
             var elementType = Common.GetElementType(type);
-            foreach (var entry in dbList.Entries)
+            if (list.IsFixedSize)
             {
-                list.Add(Common.InvokeGeneric<DocumentSerializer>("Deserialize", elementType, entry));
+                for (int iEntry = 0; iEntry < dbList.Entries.Count; iEntry++)
+                {
+                    list[iEntry] = (Common.InvokeGeneric<DocumentSerializer>("Deserialize", elementType, dbList.Entries[iEntry]));
+                }
+            }
+            else
+            {
+                foreach (var entry in dbList.Entries)
+                {
+                    list.Add((Common.InvokeGeneric<DocumentSerializer>("Deserialize", elementType, entry)));
+                }
             }
             return (T)list;
         }

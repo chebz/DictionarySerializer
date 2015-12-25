@@ -129,10 +129,19 @@ namespace cpGames.Serialization
             var listCtor = type.GetConstructor(new Type[] { typeof(int) });
             var list = (IList)listCtor.Invoke(new object[] { data.Length });
             var elementType = Common.GetElementType(type);
-
-            foreach (var item in data)
+            if (list.IsFixedSize)
             {
-                list.Add(Common.InvokeGeneric<DictionarySerializer>("Deserialize", elementType, item));
+                for (int iEntry = 0; iEntry < data.Length; iEntry++)
+                {
+                    list[iEntry] = (Common.InvokeGeneric<DictionarySerializer>("Deserialize", elementType, data[iEntry]));
+                }
+            }
+            else
+            {
+                foreach (var item in data)
+                {
+                    list.Add(Common.InvokeGeneric<DictionarySerializer>("Deserialize", elementType, item));
+                }
             }
             return (T)list;
         }       

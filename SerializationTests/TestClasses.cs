@@ -14,6 +14,10 @@ namespace cpGames.Serialization.Tests
 
             listOfFloats = new List<float>() { 0.1f, 0.2f, 32.2f };
 
+            arrayOfFloats = new float[] { 1, 2, 3.5f };
+
+            arrayOfStrings = new string[] { "abc", "def" };
+
             b = new TestClassB();
             b.SetValues();
 
@@ -55,6 +59,10 @@ namespace cpGames.Serialization.Tests
         public List<string> listOfStrings;
 
         public List<float> listOfFloats;
+
+        public float[] arrayOfFloats;
+
+        public string[] arrayOfStrings;
 
         public TestClassB b;
 
